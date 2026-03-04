@@ -201,9 +201,42 @@ export default function App() {
      File: src/App.jsx
      ---------------------------------------------------------
      Implement fetch logic inside this useEffect.
+     Implement the fetch logic inside the first useEffect.
+      Requirements (write EXACT behavior):
+      1) setLoading(true)
+      2) setError(null)
+      3) fetch from:
+         "https://jsonplaceholder.typicode.com/users"
+      4) Convert response to JSON
+      5) Store the result:
+         setUsers(data)
+         setFilteredUsers(data)
+      6) On error:
+         setError(err.message)
+      7) Always (finally):
+         setLoading(false)
+
+      Hint:
+      - Use an async function inside useEffect, then call it.
+      - Check response.ok and throw an Error if it’s 
+      false (otherwise errors won’t go to catch cleanly).
      ========================================================= */
   useEffect(() => {
     // TODO 2.1: Implement fetching users here (see lab instructions)
+      const fetchData = async () => {
+      try {
+         setLoading(true);
+         const response = await fetch('https://jsonplaceholder.typicode.com/users');
+         const jsonData = await response.json();
+         setData(jsonData);
+      } catch (error) {
+         console.error(error);
+      } finally {
+         setLoading(false);
+      }
+   };
+
+   fetchData();
   }, []);
 
   /* =========================================================
@@ -212,9 +245,33 @@ export default function App() {
      ---------------------------------------------------------
      Implement filtering logic inside this useEffect.
      Dependency array MUST be: [searchTerm, users]
+     Implement the filtering logic inside the second useEffect.
+
+      Requirements:
+      1) If searchTerm is empty:
+         setFilteredUsers(users)
+      2) Else:
+         - filter users by name ONLY
+         - case-insensitive match using includes()
+         - then setFilteredUsers(filtered)
+         Hint:
+            - Always compute from the full users array,
+             not from filteredUsers (prevents “double filtering” bugs).
+            - Make sure .toLowerCase() is applied to both user.name and searchTerm.
+      Dependency array MUST be:
+         [searchTerm, users]
      ========================================================= */
   useEffect(() => {
     // TODO 2.2: Implement filtering users here (see lab instructions)
+    if (searchTerm.trim() === "") {
+      setFilteredUsers(users);
+   } else {
+      const filtered = users.filter((user) =>
+         user.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+
+      setFilteredUsers(filtered);
+   }
   }, [searchTerm, users]);
 
   // Modal handlers (already complete)
