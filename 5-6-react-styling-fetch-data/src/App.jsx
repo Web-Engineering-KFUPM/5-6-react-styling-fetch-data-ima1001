@@ -227,8 +227,7 @@ export default function App() {
       try {
          setLoading(true);
          const response = await fetch('https://jsonplaceholder.typicode.com/users');
-         const jsonData = await response.json();
-         setData(jsonData);
+         const data = await response.json();
          setUsers(data)
          setFilteredUsers(data)
       } catch (error) {
