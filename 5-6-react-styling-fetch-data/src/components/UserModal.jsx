@@ -6,7 +6,83 @@ function UserModal({ show, user, onHide }) {
 
   return (
     <>
+    {/*
+    Implement:
+    - Replace placeholder with a React-Bootstrap <Modal>
+    - show prop controls visibility, onHide closes it (also enables the X button)
+    - Title MUST be: "User Details"
+    - Body MUST show:
+      - Large avatar: first letter of user name (CSS class "user-avatar-large")
+      - Name, Email, Phone, Website (each in its own <p>)
+    - Footer MUST have ONE Close button that triggers onHide
+
+    Hint:
+    - Use Modal subcomponents: Header/Title/Body/Footer.
+    - For the avatar, use user.name.charAt(0) and the className "user-avatar-large".
+    - The close button should call onHide when clicked.
+      <Modal
+      show={ TODO: use the prop }
+      onHide={ TODO: use the prop }
+      >
+      <Modal.Header closeButton>
+          <Modal.Title>
+            { TODO: exact title text }
+          </Modal.Title>
+      </Modal.Header>
+
+      <Modal.Body>
+          <div className="user-avatar-large">
+            { TODO: first character of user name }
+          </div>
+
+          <p><strong>Name:</strong> { TODO }</p>
+          <p><strong>Email:</strong> { TODO }</p>
+          <p><strong>Phone:</strong> { TODO }</p>
+          <p><strong>Website:</strong> { TODO }</p>
+      </Modal.Body>
+
+      <Modal.Footer>
+          <Button
+            variant="secondary"
+            onClick={ TODO: call the close handler }
+          >
+            Close
+          </Button>
+      </Modal.Footer>
+      </Modal>
+     */}
       {/* TODO 3.2: Replace this placeholder with a React-Bootstrap <Modal> */}
+      <Modal 
+      show={show}
+      onHide= {onHide}>
+
+        <Modal.Header closeButton>
+          <Modal.Title>
+            User Details
+          </Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+            <div className="user-avatar-large">
+              { user.name.charAt(0) }
+            </div>
+
+            <p><strong>Name:</strong> { user.name }</p>
+            <p><strong>Email:</strong> { user.email }</p>
+            <p><strong>Phone:</strong> { user.phone }</p>
+            <p><strong>Website:</strong> { user.website }</p>
+        </Modal.Body>
+
+        <Modal.Footer>
+            <Button
+              variant="secondary"
+              onClick={ ()=> handleCloseModal() }
+            >
+              Close
+            </Button>
+        </Modal.Footer>
+
+      </Modal>
       {/* TODO 3.2: Modal must use show={show} and onHide={onHide} */}
       {/* TODO 3.2: Must include Header/Title/Body/Footer + Close button */}
       {/* TODO 3.2: Body must show avatar (user-avatar-large) + name/email/phone/website */}
